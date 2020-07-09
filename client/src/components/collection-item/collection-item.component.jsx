@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { addItem } from "../../redux/cart/cart.actions";
+import AlertMessage from "../alert-message/alert-message.component";
 
 import {
   CollectionItemContainer,
@@ -14,15 +15,32 @@ import {
 
 const CollectionItem = ({ item, addItem }) => {
   const { name, price, imageUrl } = item;
+  const [showAlertMessage, setShowAlertMessage] = useState(false);
+
+  const showDissapearingMessage = () => {
+    setShowAlertMessage(true);
+    setTimeout(function () {
+      setShowAlertMessage(false);
+    }, 3000);
+  };
 
   return (
     <CollectionItemContainer>
+      {showAlertMessage === true ? (
+        <AlertMessage message={"Item successfully added to cart"} />
+      ) : null}
       <BackgroundImage className="image" imageUrl={imageUrl} />
       <CollectionFooterContainer>
         <NameContainer>{name}</NameContainer>
         <PriceContainer>${price}</PriceContainer>
       </CollectionFooterContainer>
-      <AddButton onClick={() => addItem(item)} inverted>
+      <AddButton
+        onClick={() => {
+          addItem(item);
+          showDissapearingMessage();
+        }}
+        inverted
+      >
         Add to cart
       </AddButton>
     </CollectionItemContainer>
