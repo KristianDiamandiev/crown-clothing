@@ -14,7 +14,7 @@ export const MessageBox = styled.div`
   border-radius: 20px;
   z-index: 100;
   border: 1px solid black;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.82);
   color: rgb(0, 210, 0);
   font-weight: 500;
 `;
